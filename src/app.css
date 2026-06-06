@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Colors */
+  --primary: #0a3d62;
+  --primary-light: #3c6382;
+  --accent: #00a896;
+  --accent-light: #028090;
+  
+  --bg-gradient-start: #f1f5f9;
+  --bg-gradient-end: #e2e8f0;
+  --card-bg: #ffffff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --border-color: #cbd5e1;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  /* Status Colors */
+  --correct-bg: #d1fae5;
+  --correct-border: #10b981;
+  --correct-text: #065f46;
+  
+  --wrong-bg: #fee2e2;
+  --wrong-border: #ef4444;
+  --wrong-text: #991b1b;
+  
+  --unanswered-bg: #f3f4f6;
+  --unanswered-border: #9ca3af;
+  --unanswered-text: #374151;
+
+  /* Fonts */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Inter', system-ui, sans-serif;
+  
+  /* Fluent UI Custom Property Overrides */
+  --fill-color: var(--card-bg);
+  --accent-fill-rest: var(--primary);
+  --accent-fill-hover: var(--primary-light);
+  --body-font: var(--font-sans);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #2980b9;
+    --primary-light: #3498db;
+    --accent: #00a896;
+    --accent-light: #05c46b;
+    
+    --bg-gradient-start: #0f172a;
+    --bg-gradient-end: #020617;
+    --card-bg: #1e293b;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border-color: #334155;
+    
+    --correct-bg: rgba(16, 185, 129, 0.15);
+    --correct-border: #10b981;
+    --correct-text: #34d399;
+    
+    --wrong-bg: rgba(239, 68, 68, 0.15);
+    --wrong-border: #ef4444;
+    --wrong-text: #f87171;
+    
+    --unanswered-bg: rgba(156, 163, 175, 0.15);
+    --unanswered-border: #9ca3af;
+    --unanswered-text: #d1d5db;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-main);
+  background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  background-color: rgba(var(--card-bg), 0.85);
+}
+
+.header-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  header {
+    padding: 1.5rem 2rem;
+  }
+}
+
+/* Base layouts */
+main {
+  flex: 1;
+  padding: 1.5rem 1rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  main {
+    padding: 2rem;
+  }
+}
+
+/* Card Styling */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+/* Option highlight styles for review state */
+.option-wrapper {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.option-wrapper.correct {
+  background-color: var(--correct-bg);
+  border-color: var(--correct-border);
+  color: var(--correct-text);
+  font-weight: 500;
+}
+
+.option-wrapper.wrong {
+  background-color: var(--wrong-bg);
+  border-color: var(--wrong-border);
+  color: var(--wrong-text);
+}
+
+.option-wrapper.muted {
+  opacity: 0.6;
+  border-style: dashed;
+}
+
+/* Micro-animations */
+.btn-primary, .btn-secondary {
+  transition: transform 0.1s ease, filter 0.2s ease;
+}
+.btn-primary:active, .btn-secondary:active {
+  transform: scale(0.98);
+}
+
+/* Custom styles for Fluent Web Components since styling inside shadow roots is limited */
+fluent-card {
+  --card-width: 100%;
+  margin-bottom: 1.5rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+fluent-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+fluent-radio {
+  --body-font: var(--font-sans);
+  font-size: 1rem;
+  color: var(--text-main);
+  padding: 0.5rem;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
